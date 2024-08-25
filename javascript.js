@@ -4,6 +4,7 @@ const SCISSORS = "scissors";
 
 let humanScore = 0;
 let computerScore = 0;
+let roundsPlayed = 0;
 
 const container = document.querySelector("#container");
 
@@ -17,6 +18,12 @@ updateScore();
 container.appendChild(display);
 container.appendChild(score);
 
+const winner = document.querySelector("#winner");
+const win = document.createElement("div");
+win.classList.add("win");
+
+winner.appendChild(win);
+
 const btns = document.querySelectorAll("button");
 btns.forEach((button) => {
     // and for each one we add a 'click' listener
@@ -24,6 +31,7 @@ btns.forEach((button) => {
       playRound(button.id, getComputerChoice());
     });
   });
+
 
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3);
@@ -38,6 +46,7 @@ function getComputerChoice(){
     return result;
 }
 function playRound (playerChoice, computerChoice){
+    roundsPlayed++;
     if(playerChoice == computerChoice){
         display.textContent = "Result: Tie!";
         updateScore();
@@ -55,6 +64,15 @@ function playRound (playerChoice, computerChoice){
         display.textContent = 'Result: You lose! ' + computerChoice +  ' beats ' + playerChoice;
         updateScore();
 
+    }
+    if(roundsPlayed >= 5){
+        if(humanScore > computerScore){
+            win.textContent = "YOU WIN!";
+        } else if(humanScore === computerScore){
+            win.textContent = "YOU TIED!";
+        } else {
+            win.textContent = "YOU LOSE!";
+        }
     }
 }
 function updateScore (){

@@ -36,3 +36,11 @@ button {
     border: 4px solid white;
     padding: 12px 32px;
 }
+#winner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+
+}
